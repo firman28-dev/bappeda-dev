@@ -74,7 +74,7 @@ Route::middleware(['shield.bots'])->group(function () {
     // });
 
     Route::get('/management', [LoginController::class, 'show'])->name('login.show');
-    Route::post('/management', [LoginController::class, 'login'])->name('login.perform');
+    Route::post('/management', [LoginController::class, 'login'])->name('login.perform')->middleware('throttle:5,1');
     Route::get('/grafik-indikator/{id}', [Home_Controller::class, 'getChartData']);
     // Route::post('/laporan-pengaduan', [Home_Controller::class, 'store'])->middleware('throttle:5,1');
     // Route::post('/pengajuan-magang', [Home_Controller::class, 'storeMagang'])->middleware('throttle:5,1');
@@ -171,14 +171,6 @@ Route::middleware(['shield.bots'])->group(function () {
         
     });
 
-
-    Route::get('/link-storage', function () {
-        // Menjalankan perintah storage:link
-        Artisan::call(command: 'storage:link');
-        
-        // Menampilkan pesan sukses
-        return 'Storage linked successfully!';
-    });
 });
 
 

@@ -442,24 +442,8 @@
                                     : asset('uploads/news/default.jpg');
                     @endphp
                     <div class="card shadow-sm border-0">
-                        {{-- <div class="card-body">
-                            <div class="d-flex">
-                                <div class="me-3 align-self-start">
-                                    <img src="{{ $imageUrl }}" alt="News Image"
-                                        style="width: 160px; height: 120px; object-fit: cover; border-radius: 8px;">
-                                </div>
-
-                                <div class="flex-grow-1">
-                                    <h5 class="fw-bold mb-2">{{ $bappeda_menulis->title }}</h5>
-                                    <p class="mb-3">{!! Str::limit(strip_tags($bappeda_menulis->description), 400) !!}</p>
-                                    <a href="{{ route('guest.news', $bappeda_menulis->id) }}" class="btn btn-sm btn-outline btn-outline-primary">
-                                        Baca Selengkapnya
-                                    </a>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="card-body">
-                            <div class="d-flex" style="min-height: 120px;">
+                            <div class="d-flex flex-column flex-md-row">
                                 <div class="me-3">
                                     <img src="{{ $imageUrl }}" alt="News Image"
                                         style="width: 160px; height: 150px; object-fit: cover; border-radius: 8px;">
@@ -474,7 +458,7 @@
                                     </div>
                                     <div>
                                         <a href="{{ route('guest.news', $bappeda_menulis->id) }}" class="btn btn-sm btn-outline btn-outline-primary mt-1">
-                                            Baca Selengkapnya
+                                            Selengkapnya
                                         </a>
                                     </div>
                                 </div>
