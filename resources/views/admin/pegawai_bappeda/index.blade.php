@@ -54,8 +54,9 @@
                             <th>Nama Pegawai</th>
                             <th>NIP</th>
                             <th>Jabatan</th>
-                            <th>Bulan</th>
+                            <th>Bidang</th>
                             <th>Foto</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -76,6 +77,13 @@
                                         </figure>
                                     @else
                                         <img class="img-thumbnail w-50" src="{{ asset('assets_global/img/blank.png') }}" itemprop="thumbnail" alt="Image description">
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if ($item->status == 'A')
+                                        <span class="badge bg-success">Aktif</span>
+                                    @else
+                                        <span class="badge bg-secondary">Tidak Aktif</span>
                                     @endif
                                 </td>
                                 <td>
@@ -141,6 +149,19 @@
                                                                         </div>
                                                                     @enderror
                                                                 </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="form-label" for="status{{ $item->id }}">Pilih Status</label>
+                                                                    <select class="form-select js-example-basic-single col-sm-12" name="status" id="status{{ $item->id }}">
+                                                                        <option value="">-- Pilih Status --</option>
+                                                                        <option value="A" {{ $item->status == 'A' ? 'selected' : '' }}>Aktif</option>
+                                                                        <option value="N" {{ $item->status == 'N' ? 'selected' : '' }}>Tidak</option>
+                                                                    </select>
+                                                                    @error('status')
+                                                                        <div class="is-invalid">
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
 
                                                                 <div class="col-12">
                                                                     <button class="btn btn-primary" type="submit">Update</button>
@@ -157,7 +178,7 @@
                                                 <i class="fa-solid fa-trash-can" ></i>
                                             </a>
                                             <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDelete{{ $item->id }}">
-                                                <form action="{{ route('gallery.destroy', $item->id) }}" method="POST">
+                                                <form action="{{ route('pegawai-bappeda.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <div class="modal-dialog">

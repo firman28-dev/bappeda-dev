@@ -39,7 +39,11 @@
          </div>
          <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
              <ul class="nav-menus">
-                 <li class="tahun-nav">
+                <li class="hide-on-mobile" style="padding: 0px 5px;">
+                    <a class="btn btn-warning btn-xs btn-pill hide-on-mobile" target="_blank" type="button" href="/">Ke Halaman Landing</a>
+                </li>
+
+                <li class="tahun-nav">
                     <div class="translate_wrapper">
                         <div class="current_lang">
                             <div class="lang">
@@ -58,54 +62,52 @@
                     </div>
                 </li>
 
+                <li class="fullscreen-body"> 
+                <span>
+                        <svg id="maximize-screen">
+                            <use href="{{ asset('assets/svg/icon-sprite.svg#full-screen') }}"></use>
+                        </svg>
+                    </span>
+                </li>
+            
+                <li>
+                    <div class="mode">
+                        <svg>
+                            <use href="{{ asset('assets/svg/icon-sprite.svg#moon') }}"></use>
+                        </svg>
+                    </div>
+                </li>
 
-                 <li class="fullscreen-body"> 
-                    <span>
-                         <svg id="maximize-screen">
-                             <use href="{{ asset('assets/svg/icon-sprite.svg#full-screen') }}"></use>
-                         </svg>
-                        </span>
-                    </li>
-                
-                 <li>
-                     <div class="mode">
-                         <svg>
-                             <use href="{{ asset('assets/svg/icon-sprite.svg#moon') }}"></use>
-                         </svg>
-                     </div>
-                 </li>
-                 
-
-                 <li class="profile-nav onhover-dropdown pe-0 py-0">
-                     <div class="d-flex profile-media">
-                        @if (auth()->user()->photo)
-                            <img src="{{ asset('uploads/photo/' . auth()->user()->photo) }}" alt="user" />
-                        @else
-                            <img class="b-r-10" src="{{ asset('assets/images/dashboard/profile.png') }}" alt="">
-                        @endif
-                        {{-- <img class="b-r-10" src="{{ asset('assets/images/dashboard/profile.png') }}" alt=""> --}}
-                        <div class="flex-grow-1">
-                            <span>{{ auth()->user()->username ?? 'User' }}</span>
-                            <p class="mb-0">{{ auth()->user()->_group->name ?? '' }} 
-                                <i class="middle fa-solid fa-angle-down"></i>
-                            </p>
-                        </div>
-                     </div>
-                     <ul class="profile-dropdown onhover-show-div">
-                         <li>
-                            <a href="{{route('user.profile')}}">
-                                <i data-feather="user"></i>
-                                <span>Account </span>
-                            </a>
-                         </li>
-                         <li>
-                            <a href="{{route('logout.perform')}}">
-                                <i data-feather="log-in"> </i>
-                                <span>Log out</span>
-                            </a>
-                         </li>
-                     </ul>
-                 </li>
+                <li class="profile-nav onhover-dropdown pe-0 py-0">
+                    <div class="d-flex profile-media">
+                    @if (auth()->user()->photo)
+                        <img src="{{ asset('uploads/photo/' . auth()->user()->photo) }}" alt="user" />
+                    @else
+                        <img class="b-r-10" src="{{ asset('assets/images/dashboard/profile.png') }}" alt="">
+                    @endif
+                    {{-- <img class="b-r-10" src="{{ asset('assets/images/dashboard/profile.png') }}" alt=""> --}}
+                    <div class="flex-grow-1">
+                        <span>{{ auth()->user()->username ?? 'User' }}</span>
+                        <p class="mb-0">{{ auth()->user()->_group->name ?? '' }} 
+                            <i class="middle fa-solid fa-angle-down"></i>
+                        </p>
+                    </div>
+                    </div>
+                    <ul class="profile-dropdown onhover-show-div">
+                        <li>
+                        <a href="{{route('user.profile')}}">
+                            <i data-feather="user"></i>
+                            <span>Account </span>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="{{route('logout.perform')}}">
+                            <i data-feather="log-in"> </i>
+                            <span>Log out</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
              </ul>
          </div>
          <script class="result-template" type="text/x-handlebars-template">
