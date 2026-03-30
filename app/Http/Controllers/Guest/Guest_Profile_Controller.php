@@ -32,9 +32,8 @@ class Guest_Profile_Controller extends Controller
     }
 
     public function showPegawai(){
-        $pegawai = PegawaiBappeda::orderBy('id','asc')->get();
+        $pegawai = PegawaiBappeda::orderBy('level','asc')->where('status','A')->get();
         if ($pegawai) {
-            // return $pejabat;
             $sent = [
                 'pegawai' => $pegawai
             ];

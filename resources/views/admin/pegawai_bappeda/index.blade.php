@@ -45,7 +45,7 @@
             <h5>Daftar Pegawai</h5>
         </div>
         <div class="card-body">
-            {{-- <button class="btn btn-primary mx-auto mt-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModallogin"><i class="fa-solid fa-plus pe-1"></i>Tambah</button> --}}
+            <button class="btn btn-primary mx-auto mt-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModallogin"><i class="fa-solid fa-plus pe-1"></i>Tambah</button>
             <div class="table-responsive custom-scrollbar state-saving-table">
                 <table class="display border table-striped" id="basic-9" style="width: 100%;">
                     <thead>
@@ -95,13 +95,13 @@
                                         </li>
 
                                         {{-- Modal Edit Gallery --}}
-                                        <div class="modal fade" id="modalEditGallery{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalEditGalleryLabel{{ $item->id }}" aria-hidden="true">
+                                        <div class="modal fade modal-lg" id="modalEditGallery{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalEditGalleryLabel{{ $item->id }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content dark-sign-up">
                                                     <div class="modal-body social-profile text-start">
                                                         <div class="modal-toggle-wrapper">
                                                             <h3>Edit Data Pegawai</h3>
-                                                            <p class="f-light">Silahkan perbarui gallery dan keterangan.</p>
+                                                            <p class="f-light">Silahkan perbarui data pegawai.</p>
 
                                                             <form class="row g-3 needs-validation theme-form"
                                                                 action="{{ route('pegawai-bappeda.update', $item->id) }}"
@@ -110,7 +110,7 @@
                                                                 @csrf
                                                                 @method('PUT')
 
-                                                                <div class="col-md-12">
+                                                                <div class="col-md-6">
                                                                     <label class="form-label" for="nama_pns{{ $item->id }}">Nama Pegawai</label>
                                                                     <input class="form-control" id="nama_pns{{ $item->id }}" name="nama_pns" type="text"
                                                                         value="{{ $item->nama_pns }}" required>
@@ -121,7 +121,7 @@
                                                                     @enderror
                                                                 </div>
 
-                                                                <div class="col-md-12">
+                                                                <div class="col-md-6">
                                                                     <label class="form-label" for="path{{ $item->id }}">Foto</label>
                                                                     <input class="form-control image-input" type="file" name="path" id="path{{ $item->id }}"
                                                                         accept="image/*">
@@ -132,8 +132,27 @@
                                                                     @enderror
                                                                 </div>
 
-                                                                <div class="col-md-12">
-                                                                    <label class="form-label" for="bidang{{ $item->id }}">Pilih Bidang</label>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="jabatan_nm{{ $item->id }}">Jabatan Pegawai</label>
+                                                                    <input class="form-control" id="jabatan_nm{{ $item->id }}" name="jabatan_nm" type="text" required value="{{ $item->jabatan_nm }}">
+                                                                    @error('jabatan_nm')
+                                                                        <div class="is-invalid">
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="nip{{ $item->id }}">NIP</label>
+                                                                    <input class="form-control" id="nip{{ $item->id }}" name="nip" type="text" required value="{{ $item->nip }}">
+                                                                    @error('nip')
+                                                                        <div class="is-invalid">
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="bidang{{ $item->id }}">Bidang Pegawai</label>
                                                                     <select class="form-select js-example-basic-single col-sm-12" name="bidang" id="bidang{{ $item->id }}">
                                                                         <option value="">-- Pilih Bidang --</option>
                                                                         @foreach ($bidang as $st)
@@ -149,14 +168,30 @@
                                                                         </div>
                                                                     @enderror
                                                                 </div>
-                                                                <div class="col-md-12">
-                                                                    <label class="form-label" for="status{{ $item->id }}">Pilih Status</label>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="status{{ $item->id }}">Status Pegawai</label>
                                                                     <select class="form-select js-example-basic-single col-sm-12" name="status" id="status{{ $item->id }}">
                                                                         <option value="">-- Pilih Status --</option>
                                                                         <option value="A" {{ $item->status == 'A' ? 'selected' : '' }}>Aktif</option>
                                                                         <option value="N" {{ $item->status == 'N' ? 'selected' : '' }}>Tidak</option>
                                                                     </select>
                                                                     @error('status')
+                                                                        <div class="is-invalid">
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="level{{ $item->id }}">Level Pegawai</label>
+                                                                    <select class="form-select js-example-basic-single col-sm-12" name="level" id="level{{ $item->id }}">
+                                                                        <option value="">-- Pilih Level --</option>
+                                                                        <option value="1" {{ $item->level == '1' ? 'selected' : '' }}>Kaban</option>
+                                                                        <option value="2" {{ $item->level == '2' ? 'selected' : '' }}>Kabid</option>
+                                                                        <option value="3" {{ $item->level == '3' ? 'selected' : '' }}>Staff/Perencana/Fungsional/Adm</option>
+                                                                        <option value="4" {{ $item->level == '4' ? 'selected' : '' }}>Non ASN</option>
+                                                                    </select>
+                                                                    @error('level')
                                                                         <div class="is-invalid">
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                         </div>
@@ -213,6 +248,116 @@
 </div>
 
 {{-- Modal --}}
+
+<div class="modal fade modal-lg" id="exampleModallogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalloginLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content dark-sign-up">
+            <div class="modal-body social-profile text-start">
+                <div class="modal-toggle-wrapper">
+                    <h3>Tambah Data Pegawai</h3>
+                    <p class="f-light">Silahkan tambahkan data pegawai</p>
+
+                    <form class="row g-3 needs-validation theme-form"
+                        action="{{ route('pegawai-bappeda.store') }}"
+                        method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="nama_pns">Nama Pegawai</label>
+                            <input class="form-control" id="nama_pns" name="nama_pns" type="text"required>
+                            @error('nama_pns')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="path">Foto</label>
+                            <input class="form-control image-input" type="file" name="path" id="path"
+                                accept="image/*">
+                            @error('path')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="jabatan_nm">Jabatan Pegawai</label>
+                            <input class="form-control" id="jabatan_nm" name="jabatan_nm" type="text" required>
+                            @error('jabatan_nm')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="nip">NIP</label>
+                            <input class="form-control" id="nip" name="nip" type="text" required>
+                            @error('nip')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="bidang">Bidang Pegawai</label>
+                            <select class="form-select js-example-basic-single col-sm-12" name="bidang" id="bidang">
+                                <option value="">-- Pilih Bidang --</option>
+                                @foreach ($bidang as $st)
+                                    <option value="{{ $st->id }}">
+                                        {{ $st->label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('bidang')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="status">Status Pegawai</label>
+                            <select class="form-select js-example-basic-single col-sm-12" name="status" id="status">
+                                <option value="">-- Pilih Status --</option>
+                                <option value="A">Aktif</option>
+                                <option value="N">Tidak</option>
+                            </select>
+                            @error('status')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="level">Level Pegawai</label>
+                            <select class="form-select js-example-basic-single col-sm-12" name="level" id="level">
+                                <option value="">-- Pilih Level --</option>
+                                <option value="1">Kaban</option>
+                                <option value="2">Kabid</option>
+                                <option value="3">Staff/Perencana/Fungsional</option>
+                                <option value="4">Non ASN</option>
+                            </select>
+                            @error('level')
+                                <div class="is-invalid">
+                                    <span class="text-danger">{{ $message }}</span>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Tambah</button>
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
     aria-hidden="true">
